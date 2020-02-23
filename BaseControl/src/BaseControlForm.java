@@ -1,3 +1,6 @@
+
+import javax.swing.DefaultComboBoxModel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,12 +12,19 @@
  * @author chirillo
  */
 public class BaseControlForm extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form BaseControlForm
      */
+    private final DefaultComboBoxModel<String> namesmodel = new DefaultComboBoxModel<>();
+    private final DefaultComboBoxModel<Animal> animalsmodel = new DefaultComboBoxModel<>();
+
     public BaseControlForm() {
         initComponents();
+        CbNames.setModel(namesmodel);
+        for(String kind:AnimalFabric.keys()) namesmodel.addElement(kind);
+        CbAnimals.setModel(animalsmodel);
+        for(String kind:AnimalFabric.keys()) animalsmodel.addElement(AnimalFabric.make(kind, CbText.toString()));
     }
 
     /**
@@ -29,6 +39,10 @@ public class BaseControlForm extends javax.swing.JFrame {
         EdLogScroll = new javax.swing.JScrollPane();
         EdLog = new javax.swing.JTextArea();
         BtnRun = new javax.swing.JButton();
+        CbNames = new javax.swing.JComboBox<>();
+        CbAnimals = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        CbText = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,6 +59,10 @@ public class BaseControlForm extends javax.swing.JFrame {
             }
         });
 
+        CbText.setColumns(20);
+        CbText.setRows(5);
+        jScrollPane1.setViewportView(CbText);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -52,17 +70,30 @@ public class BaseControlForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(EdLogScroll)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(BtnRun))
-                    .addComponent(EdLogScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(108, 108, 108)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CbNames, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CbAnimals, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(EdLogScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(CbNames, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(CbAnimals, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(EdLogScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnRun)
                 .addContainerGap())
@@ -90,7 +121,7 @@ public class BaseControlForm extends javax.swing.JFrame {
             +System.lineSeparator()
         );
         //*///
-        EdLog.append
+        /*EdLog.append
         (
             new IdBuilder()
             .setDefault("NULL")
@@ -100,6 +131,10 @@ public class BaseControlForm extends javax.swing.JFrame {
             .append(1)
             .append(10)      
             .toString()
+            +System.lineSeparator()
+        );*/
+        EdLog.append(
+            AnimalFabric.make((String)CbNames.getSelectedItem(), CbText.getText())
             +System.lineSeparator()
         );
     }//GEN-LAST:event_BtnRunActionPerformed
@@ -142,7 +177,11 @@ public class BaseControlForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnRun;
+    private javax.swing.JComboBox<Animal> CbAnimals;
+    private javax.swing.JComboBox<String> CbNames;
+    private javax.swing.JTextArea CbText;
     private javax.swing.JTextArea EdLog;
     private javax.swing.JScrollPane EdLogScroll;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
