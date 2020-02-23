@@ -16,8 +16,6 @@ public class AnimalFabric
             put("Walrus", (name)->new Walrus(name));
             put("Otter", (name)->new Otter(name));
             put("Parrot", (name)->new Parrot(name));
-            
-            
         }
     };
     
@@ -98,8 +96,8 @@ class Walrus extends Mammal
      public Walrus(String name) { 
         super(name);
     }
-    @Override public String toString() { 
-        return "Walrus{" + '}'; 
+    @Override public String path() { 
+        return super.path() + "Walrus : ";
     }
 }
 
@@ -108,8 +106,8 @@ class Spider extends Insect
      public Spider(String name) { 
         super(name);
     }
-    @Override public String toString() { 
-        return "Spider{" + '}'; 
+    @Override public String path() { 
+        return super.path() + "Spider: "; 
     }
 }
 
@@ -118,8 +116,8 @@ class Parrot extends Bird
      public Parrot(String name) { 
         super(name);
     }
-    @Override public String toString() { 
-        return "Parrot{" + '}'; 
+    @Override public String path() { 
+        return super.path() + "Parrot: "; 
     }
 }
 
@@ -128,8 +126,8 @@ class Otter extends Mammal
      public Otter(String name) { 
         super(name);
     }
-    @Override public String toString() { 
-        return "Otter{" + '}'; 
+    @Override public String path() { 
+        return super.path() + "Otter: "; 
     }
 }
 
@@ -138,8 +136,8 @@ class Cat extends Mammal
      public Cat(String name) { 
         super(name);
     }
-    @Override public String toString() { 
-        return "Cat{" + '}'; 
+    @Override public String path() { 
+        return super.path() + "Cat: "; 
     }
 }
 
@@ -148,7 +146,7 @@ class Fly extends Insect
     public Fly(String name) { 
         super(name);
     }
-    @Override public String toString() { 
-        return "Fly{" + '}'; 
+    @Override public String path() { 
+        return super.path() + "Fly: "; 
     }
 }
